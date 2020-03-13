@@ -20,6 +20,7 @@ module.exports = {
       throw err
     }
   },
+
   async getSites(req, res) {
     try {
       const data = await siteService.getSites()
@@ -48,6 +49,7 @@ module.exports = {
       throw err
     }
   },
+
   async getAssets(req, res) {
     try {
       const data = await siteService.getAssets()
@@ -58,6 +60,7 @@ module.exports = {
       throw err
     }
   },
+
   async updateAsset(req, res) {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -76,6 +79,7 @@ module.exports = {
       throw err
     }
   },
+
   async getAsset(req, res) {
     const key = req.params.key
     try {
@@ -95,10 +99,9 @@ module.exports = {
       throw new error.RequestValidationError(errors.mapped())
     }
     const asset_key = req.params.key
-    const site_key = req.body.site_key
-    const name = req.body.name
+    const site_key = req.body.site
     try {
-      const data = await siteService.logEvent(asset_key, name, site_key)
+      const data = await siteService.logEvent(asset_key, site_key)
       return res.json(data)
     }
     catch (err) {
@@ -118,6 +121,7 @@ module.exports = {
       throw err
     }
   },
+
   async getEventsBySite(req, res) {
     try {
       //site key ?
