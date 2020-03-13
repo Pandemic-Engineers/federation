@@ -88,7 +88,7 @@ module.exports = {
     }
   },
 
-  async logVisit(req, res) {
+  async logEvent(req, res) {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       errors.formatWith((error) => { return { message: error.msg } })
@@ -98,34 +98,34 @@ module.exports = {
     const site_key = req.body.site_key
     const name = req.body.name
     try {
-      const data = await siteService.logVisit(asset_key, name, site_key)
+      const data = await siteService.logEvent(asset_key, name, site_key)
       return res.json(data)
     }
     catch (err) {
-      err.context = new error.ErrorContext('site', 'logVisit')
+      err.context = new error.ErrorContext('site', 'logEvent')
       throw err
     }
   },
 
-  async getVisitsByAsset(req, res) {
+  async getEventsByAsset(req, res) {
     const asset_key = req.params.key
     try {
-      const data = await siteService.getVisitsByAsset(asset_key)
+      const data = await siteService.getEventsByAsset(asset_key)
       return res.json(data)
     }
     catch (err) {
-      err.context = new error.ErrorContext('site', 'getVisitsByAsset')
+      err.context = new error.ErrorContext('site', 'getEventsByAsset')
       throw err
     }
   },
-  async getVisitsBySite(req, res) {
+  async getEventsBySite(req, res) {
     try {
       //site key ?
-      const data = await siteService.getVisitsBySite()
+      const data = await siteService.getEventsBySite()
       return res.json(data)
     }
     catch (err) {
-      err.context = new error.ErrorContext('site', 'getVisitsBySite')
+      err.context = new error.ErrorContext('site', 'getEventsBySite')
       throw err
     }
   },

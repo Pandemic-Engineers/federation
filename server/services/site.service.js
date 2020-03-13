@@ -26,17 +26,17 @@ module.exports = {
     let data = await siteModel.getAsset(key)
     return data
   },
-  async logVisit(asset_key, name, site_key) {
-    let data = await siteModel.logVisit(asset_key, name, site_key)
+  async logEvent(asset_key, name, site_key) {
+    let data = await siteModel.logEvent(asset_key, name, site_key)
     return data
   },
 
-  async getVisitsByAsset(asset_key) {
-    let data = await siteModel.getVisitsByAsset(asset_key)
+  async getEventsByAsset(asset_key) {
+    let data = await siteModel.getEventsByAsset(asset_key)
     return data
   },
-  async getVisitsBySite() {
-    let data = await siteModel.getVisitsBySite()
+  async getEventsBySite() {
+    let data = await siteModel.getEventsBySite()
     return data
   },
 }

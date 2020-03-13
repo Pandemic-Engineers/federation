@@ -16,9 +16,10 @@ module.exports = function (app) {
     .get(asyncHandler(siteController.getAsset))
   //.delete(asyncHandler(siteController.removeAsset))
 
-  app.get('/assets/all/visits', asyncHandler(siteController.getVisitsBySite))
-  app.get(`/assets/:key/visits`, asyncHandler(siteController.getVisitsByAsset))
-  app.route(`/assets/:key/visit`)
-    .post(siteSchema.log_visit, asyncHandler(siteController.logVisit))
+  app.get('/assets/all/events', asyncHandler(siteController.getEventsBySite))
+  app.get(`/assets/:key/events`, asyncHandler(siteController.getEventsByAsset))
+
+  app.route(`/assets/:key/events`)
+    .post(siteSchema.log_event, asyncHandler(siteController.logEvent))
 
 }

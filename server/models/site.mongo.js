@@ -53,7 +53,7 @@ module.exports = {
     return await dbClient.collection('assets').findOne({ key }, { projection: { _id: 0 } })
   },
 
-  async logVisit(asset_key, name, site_key) {
+  async logEvent(asset_key, name, site_key) {
     const key = crypto.randomBytes(12).toString('hex')
     const dbClient = db.getClient()
     const data = {
@@ -64,25 +64,25 @@ module.exports = {
       type: 'VISIT',
       created: new Date()
     }
-    await dbClient.collection('visits').insertOne(data)
+    await dbClient.collection('events').insertOne(data)
     return data
   },
 
-  async getVisitsByAsset(asset_key) {
+  async getEventsByAsset(asset_key) {
     const dbClient = db.getClient()
-    const visits = await dbClient.collection('visits')
+    const events = await dbClient.collection('events')
       .find({ asset_key }, { projection: { _id: 0 } })
       .sort({ _id: -1 }).toArray()
-    const totalCount = await dbClient.collection('visits').countDocuments({ asset_key })
-    return { total_count: totalCount, visits: visits }
+    const totalCount = await dbClient.collection('events').countDocuments({ asset_key })
+    return { total_count: totalCount, events: events }
   },
 
-  async getVisitsBySite() {
+  async getEventsBySite() {
     const dbClient = db.getClient()
-    const visits = await dbClient.collection('visits')
+    const events = await dbClient.collection('events')
       .find({}, { projection: { _id: 0 } })
       .sort({ _id: -1 }).toArray()
-    const totalCount = await dbClient.collection('visits').countDocuments({})
-    return { total_count: totalCount, visits: visits }
+    const totalCount = await dbClient.collection('events').countDocuments({})
+    return { total_count: totalCount, events: events }
   },
 }
