@@ -11,6 +11,11 @@ module.exports = {
     return data
   },
 
+  async getSite(key) {
+    let data = await siteModel.getSite(key)
+    return data
+  },
+
   async createAsset(name) {
     let data = await siteModel.createAsset(name)
     return data
@@ -41,8 +46,8 @@ module.exports = {
     return data
   },
   
-  async getEventsBySite() {
-    let data = await siteModel.getEventsBySite()
+  async getEventsBySite(site) {
+    let data = await siteModel.getEventsBySite(site)
     return data
   },
 }

@@ -1,7 +1,7 @@
 module.exports = {
     port: 3000,
-    MONGODB_ConnectionString: process.env.MONGODB_URL || 'mongodb://localhost:27017/pellar-federation',
-    mongodb_name: process.env.MONGODB_NAME || 'pellar-federation',
+    MONGODB_ConnectionString: process.env.MONGODB_URL || 'mongodb://localhost:27017/theia-federation',
+    mongodb_name: process.env.MONGODB_NAME || 'theia-federation',
     MONGODB_POOL_SIZE: process.env.MONGODB_POOL_SIZE || 10,
     APPLICATION_NAME: process.env.APPLICATION_NAME || 'Federation (Development)',
     ERROR_NEW_LINE_SEPARATOR: process.env.ERROR_NEW_LINE_SEPARATOR || `\n`,

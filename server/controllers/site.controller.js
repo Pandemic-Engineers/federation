@@ -31,6 +31,18 @@ module.exports = {
       throw err
     }
   },
+  async getSite(req, res) {
+    const key = req.params.key
+    try {
+      const data = await siteService.getSite(key)
+      return res.json(data)
+    }
+    catch (err) {
+      err.context = new error.ErrorContext('site', 'getSite', { key })
+      throw err
+    }
+  },
+
 
   async createAsset(req, res) {
     const errors = validationResult(req);
@@ -111,25 +123,25 @@ module.exports = {
   },
 
   async getEventsByAsset(req, res) {
-    const asset_key = req.params.key
+    const asset = req.params.key
     try {
-      const data = await siteService.getEventsByAsset(asset_key)
+      const data = await siteService.getEventsByAsset(asset)
       return res.json(data)
     }
     catch (err) {
-      err.context = new error.ErrorContext('site', 'getEventsByAsset')
+      err.context = new error.ErrorContext('site', 'getEventsByAsset', { asset })
       throw err
     }
   },
 
   async getEventsBySite(req, res) {
+    const site = req.params.key
     try {
-      //site key ?
-      const data = await siteService.getEventsBySite()
+      const data = await siteService.getEventsBySite(site)
       return res.json(data)
     }
     catch (err) {
-      err.context = new error.ErrorContext('site', 'getEventsBySite')
+      err.context = new error.ErrorContext('site', 'getEventsBySite', { site })
       throw err
     }
   },

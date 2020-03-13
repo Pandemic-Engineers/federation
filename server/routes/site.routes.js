@@ -6,6 +6,8 @@ module.exports = function (app) {
   app.route(`/sites`)
     .post(siteSchema.create_site, asyncHandler(siteController.createSite))
     .get(asyncHandler(siteController.getSites))
+  app.route(`/sites/:key`)
+    .get(asyncHandler(siteController.getSite))
 
   app.route(`/assets`)
     .post(siteSchema.create_asset, asyncHandler(siteController.createAsset))
@@ -16,7 +18,7 @@ module.exports = function (app) {
     .get(asyncHandler(siteController.getAsset))
   //.delete(asyncHandler(siteController.removeAsset))
 
-  app.get('/assets/all/events', asyncHandler(siteController.getEventsBySite))
+  app.get(`/sites/:key/events`, asyncHandler(siteController.getEventsBySite))
   app.get(`/assets/:key/events`, asyncHandler(siteController.getEventsByAsset))
 
   app.route(`/assets/:key/events`)

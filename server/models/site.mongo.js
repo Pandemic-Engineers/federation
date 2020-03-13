@@ -15,12 +15,17 @@ module.exports = {
 
     await dbClient.collection('sites').insertOne(data)
 
-    return {result:'SUCCESS', key}
+    return { result: 'SUCCESS', key }
   },
 
   async getSites() {
     const dbClient = db.getClient()
-    return await dbClient.collection('sites').find({}, { projection: { _id: 0, removed:0 } }).sort({ _id: -1 }).toArray()
+    return await dbClient.collection('sites').find({}, { projection: { _id: 0, removed: 0 } }).sort({ _id: -1 }).toArray()
+  },
+
+  async getSite(key) {
+    const dbClient = db.getClient()
+    return await dbClient.collection('sites').findOne({ key }, { projection: { _id: 0 } })
   },
 
   async createAsset(name) {
@@ -34,7 +39,7 @@ module.exports = {
       modified: new Date()
     }
     await dbClient.collection('assets').insertOne(data)
-    return {result:'SUCCESS', key}
+    return { result: 'SUCCESS', key }
   },
 
   async getAssets() {
@@ -49,7 +54,7 @@ module.exports = {
       modified: new Date()
     }
     await dbClient.collection('assets').findOneAndUpdate({ key }, { $set: data }, { projection: { _id: 0 }, returnOriginal: false })
-    return {result:'SUCCESS', key} // should return if it is successful
+    return { result: 'SUCCESS', key } // should return if it is successful
   },
 
   async getAsset(key) {
@@ -68,7 +73,7 @@ module.exports = {
       created: new Date()
     }
     await dbClient.collection('events').insertOne(data)
-    return {result:'SUCCESS', key}
+    return { result: 'SUCCESS', key }
   },
 
   async getEventsByAsset(asset) {
@@ -80,10 +85,10 @@ module.exports = {
     return { total_count: totalCount, events: events }
   },
 
-  async getEventsBySite() {
+  async getEventsBySite(site) {
     const dbClient = db.getClient()
     const events = await dbClient.collection('events')
-      .find({}, { projection: { _id: 0 } })
+      .find({ site }, { projection: { _id: 0 } })
       .sort({ _id: -1 }).toArray()
     const totalCount = await dbClient.collection('events').countDocuments({})
     return { total_count: totalCount, events: events }
