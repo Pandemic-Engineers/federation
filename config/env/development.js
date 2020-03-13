@@ -1,5 +1,5 @@
 module.exports = {
-    port: 4000,
+    port: 3000,
     MONGODB_ConnectionString: process.env.MONGODB_URL || 'mongodb://localhost:27017/pellar-federation',
     mongodb_name: process.env.MONGODB_NAME || 'pellar-federation',
     MONGODB_POOL_SIZE: process.env.MONGODB_POOL_SIZE || 10,

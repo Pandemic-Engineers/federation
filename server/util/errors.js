@@ -13,7 +13,7 @@ let errors = {
     duplicate_request_in_hours: { message: 'Duplicate request, please try again in %s hour(s).', code: 110, http_status_code: 422 },
 
     user_email_exist_error: { message: 'This email address is already in use.', code: 1100, http_status_code: 400 },
-    user_register_username_required: { message: 'user name is required.', code: 1101, http_status_code: 400 },
+    user_register_username_required: { message: 'Please provide first and last name.', code: 1101, http_status_code: 400 },
     user_register_email_password_required: { message: 'Password is required.', code: 1102, http_status_code: 400 },
     user_login_email_password_required: { message: 'Please provide both email address and password.', code: 1103, http_status_code: 400 },
     user_login_email_password_incorrect: { message: 'Email address or password is incorrect.', code: 1104, http_status_code: 400 },
