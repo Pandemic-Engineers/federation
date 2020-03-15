@@ -12,7 +12,6 @@ const reporter = new JasmineConsoleReporter({
   emoji: true,
   beep: false,
 });
-
 jas.loadConfigFile('spec/support/jasmine.json');
 jas.env.clearReporters();
 jas.addReporter(reporter);
