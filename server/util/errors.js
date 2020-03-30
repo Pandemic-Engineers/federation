@@ -39,6 +39,8 @@ let errors = {
     transaction_account_type_not_support: { message: 'Account type is not supported.', code: 2103, http_status_code: 400 },
     transaction_same_accounts: { message: 'Sender and recipient cannot be the same.', code: 2104, http_status_code: 400 },
     transaction_not_found: { message: 'The transaction address was not found.', code: 2105, http_status_code: 404 },
+
+    asset_create_file_required_error: { message: 'File is required.', code: 3100, http_status_code: 400 },
 }
 
 module.exports = errors

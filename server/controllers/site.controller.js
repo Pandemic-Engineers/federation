@@ -1,6 +1,7 @@
 const siteService = require('../services/site.service')
 const { validationResult } = require('express-validator')
 const error = require('../util/applicationError')
+const s3Upload = require('../util/s3Upload')
 
 module.exports = {
   async createSite(req, res) {
@@ -50,11 +51,22 @@ module.exports = {
       errors.formatWith((error) => { return { message: error.msg } })
       throw new error.RequestValidationError(errors.mapped())
     }
-
     try {
-      const name = req.body.name
-      const data = await siteService.createAsset(name)
-      return res.json(data)
+      const result = await s3Upload.uploadAssetImg(req, res)
+      if (result.success) {
+        const name = req.body.name
+        const face_encoding = req.body.face_encoding
+        const hash = req.body.hash
+
+        const img = result.s3_key
+        const location = result.location
+        const data = await siteService.createAsset(name, face_encoding, hash, img, location)
+        return res.json(data)
+      } else {
+        if (result.error_code === 104) {
+          throw new error.ApplicationError(applicationErrors.asset_create_file_required_error)
+        }
+      }
     }
     catch (err) {
       err.context = new error.ErrorContext('site', 'createAsset')

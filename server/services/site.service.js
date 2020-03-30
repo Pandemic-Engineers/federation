@@ -16,8 +16,8 @@ module.exports = {
     return data
   },
 
-  async createAsset(name) {
-    let data = await siteModel.createAsset(name)
+  async createAsset(name, face_encoding, hash, img, location) {
+    let data = await siteModel.createAsset(name, face_encoding, hash, img, location)
     return data
   },
 
@@ -45,7 +45,7 @@ module.exports = {
     let data = await siteModel.getEventsByAsset(asset_key)
     return data
   },
-  
+
   async getEventsBySite(site) {
     let data = await siteModel.getEventsBySite(site)
     return data

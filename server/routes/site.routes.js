@@ -10,7 +10,7 @@ module.exports = function (app) {
     .get(asyncHandler(siteController.getSite))
 
   app.route(`/assets`)
-    .post(siteSchema.create_asset, asyncHandler(siteController.createAsset))
+    .post(asyncHandler(siteController.createAsset))
     .get(asyncHandler(siteController.getAssets))
 
   app.route(`/assets/:key`)

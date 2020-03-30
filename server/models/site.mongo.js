@@ -28,12 +28,16 @@ module.exports = {
     return await dbClient.collection('sites').findOne({ key }, { projection: { _id: 0 } })
   },
 
-  async createAsset(name) {
+  async createAsset(name, face_encoding, hash, img, location) {
     const key = crypto.randomBytes(12).toString('hex')
     const dbClient = db.getClient()
     const data = {
       key,
       name,
+      face_encoding,
+      hash,
+      img,
+      location,
       removed: false,
       created: new Date(),
       modified: new Date()
